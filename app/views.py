@@ -4,4 +4,7 @@ from app import app
 @app.route('/index')
 
 def index():
-    return "Hello, World!"
+    user = {'nickname': 'Sally'} # fake user
+    return render_template('index.html',
+                            title ='Home',
+                            user=user)
