@@ -11,7 +11,7 @@
   <body>
     <h1>Hi {{ user.nickname }}.</h1>
     {% for post in posts %}
-    <div><p>{{ post.author.nickname }} said: <b>{{ post.body }}</p></div>
+    <div><p><b>{{ post.author.nickname }}</b> said: {{ post.body }}</p></div>
     {% endfor %}
   </body>
 </html>
