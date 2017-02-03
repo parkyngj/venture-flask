@@ -12,6 +12,11 @@ For my own reference.
 - Run `pip3 install sqlalchemy-migrate`
 - Run `pip3 install six`
 - Run `pip3 install sqlparse`
+- Run `pip3 install Flask-Login`
+  (handles user logged in state)
+- Run `pip3 install Flask-OpenID`
+  (provides user auth)
+
 
 # Some SQLAlchemy Database Interactions
 
