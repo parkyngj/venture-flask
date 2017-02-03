@@ -36,7 +36,7 @@ If at any time working on a session there is an error, then a call to `db.sessio
 ```python
 # Add another user
 >>> u2 = models.User(nickname='susan', email='susan@example.com')
->>> db.sessions.add(u2)
+>>> db.session.add(u2)
 >>> db.session.commit()
 
 # Query for all users
@@ -83,3 +83,17 @@ u # Returns <User u'sally'>
 ```
 
 See [Flask-SQLAlchemy] docs for learning about other options available to query database.
+
+Can erase test users and posts we have created to clean database for further usage:
+
+```python
+>>> users = models.User.query.all()
+>>> for u in users:
+...   db.session.delete(u)
+...
+>>> posts = models.Post.query.all()
+>>> for p in posts:
+...   db.session.delete(p)
+...
+>>> db.session.commit()
+```
