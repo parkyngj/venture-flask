@@ -21,12 +21,12 @@ Run `python3`.
 
 ```python
 # Brings database and models into memory
-from app import db, models
+>>> from app import db, models
 
 # Create a new user
-u = models.User(nickname='sally', email='sally@example.com')
-db.session.add(u)
-db.session.commit()
+>>> u = models.User(nickname='sally', email='sally@example.com')
+>>> db.session.add(u)
+>>> db.session.commit()
 ```
 
 Changes to database are done in context of a session. Multiple changes can be accumulated in a session and once all of the changes has been registered, we issue a single `db.session.commit()`.
@@ -35,13 +35,13 @@ If at any time working on a session there is an error, then a call to `db.sessio
 
 ```python
 # Add another user
-u2 = models.User(nickname='susan', email='susan@example.com')
-db.sessions.add(u2)
-db.session.commit()
+>>> u2 = models.User(nickname='susan', email='susan@example.com')
+>>> db.sessions.add(u2)
+>>> db.session.commit()
 
 # Query for all users
-users = models.User.query.all()
-users # Returns [<User u'sally'>, <User u'susan'>]
+>>> users = models.User.query.all()
+>>> users # Returns [<User u'sally'>, <User u'susan'>]
 >>> for u in users:
 ...     print(u.id,u.nickname)
 ...
@@ -53,6 +53,9 @@ u = models.User.query.get(1)
 u # Returns <User u'sally'>
 
 # Add a blog post
-import datetime
-
+>>> import datetime
+>>> u = models.User.query.get(1)
+>>> p = models.Post(body="my first post!", timestamp=datetime.datetime.utcnow(), author=u)
+>>> db.session.add(p)
+>>> db.session.commit()
 ```
