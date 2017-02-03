@@ -19,7 +19,7 @@ For my own reference.
 
 Run `python3`.
 
-```python3
+```python
 # Brings database and models into memory
 from app import db, models
 
@@ -33,7 +33,7 @@ Changes to database are done in context of a session. Multiple changes can be ac
 
 If at any time working on a session there is an error, then a call to `db.session.rollback()` reverts the database to its state before the session was started.
 
-```python3
+```python
 # Add another user
 u2 = models.User(nickname='susan', email='susan@example.com')
 db.sessions.add(u2)
@@ -53,5 +53,6 @@ u = models.User.query.get(1)
 u # Returns <User u'sally'>
 
 # Add a blog post
+import datetime
 
 ```
