@@ -58,4 +58,28 @@ u # Returns <User u'sally'>
 >>> p = models.Post(body="my first post!", timestamp=datetime.datetime.utcnow(), author=u)
 >>> db.session.add(p)
 >>> db.session.commit()
+
+# Get all posts from a user
+>>> u # Returns <User u'sally'>
+>>> posts = u.posts.all()
+>>> posts
+[<Post u'my first post!'>]
+
+# Obtain author of each post
+>>> for p in posts:
+...   print(p.id,p.author.nickname,p.body)
+...
+1 sally my first post!
+
+# User 2 has no posts
+>>> u2 = models.User.query.get(2)
+>>> u # Returns <User u'susan'>
+>>> u.posts.all()
+[]
+
+# Get all users in reverse alphabetical order
+>>> models.User.query.order_by('nickname_desc').all()
+[<User u'susan'>, <User u'sally'>]
 ```
+
+See [Flask-SQLAlchemy] docs for learning about other options available to query database.
