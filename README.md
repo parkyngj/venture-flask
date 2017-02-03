@@ -14,8 +14,9 @@ For my own reference.
 - Run `pip3 install sqlparse`
 - Run `pip3 install Flask-Login`
   (handles user logged in state)
-- Run `pip3 install Flask-OpenID`
+- Run `pip3 install git+git://github.com/mitsuhiko/flask-openid.git`
   (provides user auth)
+  (since we use Python3, install development version of Flask-OpenID pkg)
 
 
 # Some SQLAlchemy Database Interactions
