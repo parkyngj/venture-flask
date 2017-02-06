@@ -53,21 +53,27 @@ def login():
 
 @oid.after_login
 def after_login(resp):
+    # require valid email
     if resp.email is None or resp.email == "":
         flash('Invalid login. Please try again.')
         return redirect(url_for('login'))
+    # search database for email provided
     user = User.query.filter_by(email=resp.email).first()
+    # if email not found, then consider as new user. Add new user to database
     if user is None:
         nickname = resp.nickname
+        # handle case of missing nickname, since some openID providers may not have this info
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
         user = User(nickname=nickname, email=resp.email)
         db.session.add(user)
         db.session.commit()
     remember_me = False
+    # load remember_me value from Flask session
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
+    # call Flask-Login's login_user function to register as valid login
     login_user(user, remember = remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
