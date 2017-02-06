@@ -20,5 +20,7 @@ from app import views, models
 
 lm = LoginManager()
 lm.init_app(app)
+# Flask-Login must know what view logs users in, so we configure this
+lm.login_view = 'login'
 # Flask-OpenID extension requires path to a temp folder where files can be stored
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
