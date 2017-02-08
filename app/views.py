@@ -4,11 +4,14 @@ from app import app, db, lm, oid
 from .forms import LoginForm
 form .models import User
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
 @app.route('/')
 @app.route('/index')
 
 def index():
-    user = {'nickname': 'Sally'} # fake user
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
