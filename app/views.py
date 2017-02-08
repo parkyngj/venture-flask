@@ -12,6 +12,10 @@ def before_request():
 @app.route('/index')
 
 def index():
+    # Ensure that the page is seen only by logged in users
+    @login_required
+    # Pass g.user down to template, not dummy fake user
+    user = g.user
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
