@@ -84,6 +84,11 @@ def after_login(resp):
     login_user(user, remember = remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
