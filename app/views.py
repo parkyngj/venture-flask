@@ -4,11 +4,18 @@ from app import app, db, lm, oid
 from .forms import LoginForm
 form .models import User
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
 @app.route('/')
 @app.route('/index')
 
 def index():
-    user = {'nickname': 'Sally'} # fake user
+    # Ensure that the page is seen only by logged in users
+    @login_required
+    # Pass g.user down to template, not dummy fake user
+    user = g.user
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
@@ -76,6 +83,11 @@ def after_login(resp):
     # call Flask-Login's login_user function to register as valid login
     login_user(user, remember = remember_me)
     return redirect(request.args.get('next') or url_for('index'))
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @lm.user_loader
 def load_user(id):
